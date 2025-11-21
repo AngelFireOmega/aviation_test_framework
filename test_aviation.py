@@ -82,3 +82,24 @@ def test_get_countries_returns_100_with_200_ok(aviation_api_client):
         print("\nNo countries were found in the response.")
 
     print(f"\nSuccessfully retrieved {len(countries)} countries from /countries endpoint with status code {response.status_code}.")
+
+def test_get_request_with_invalid_api_key(aviation_api_client):
+    """
+    Tests that the API returns an 'invalid_access_key' error and 401 status when a wrong API key is used.
+    """
+    # 1. Arrange: Modify the client to use an invalid API key
+    aviation_api_client.params['access_key'] = "INVALID_KEY"
+    
+    # 2. Act: Make an API call
+    response = aviation_api_client.get_airports()
+    response_json = response.json()
+
+    # 3. Assert: Verify that the status code is 401 (Unauthorized)
+    assert response.status_code == 401, \
+        f"Expected status code 401 for invalid API key, but got {response.status_code}"
+
+    print("\n--- Response with Invalid Key ---")
+    print(response_json)
+    print("---------------------------------")
+
+    assert "error" in response_json, "Response should contain an 'error' object for a failed request"

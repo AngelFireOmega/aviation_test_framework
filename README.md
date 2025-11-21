@@ -3,6 +3,7 @@
 ## 總覽
 
 本專案是一個使用 `pytest` 和頁面物件模型（POM）模式的 Python API 測試框架範例。它示範了如何建構可擴展和可維護的自動化測試。
+此專案的部分程式碼與文件由 Google Gemini 輔助生成
 
 此框架包含針對以下 API 的測試套件：
 - **Aviationstack API**：用於獲取航空和機場數據，特別是機場列表。
@@ -62,12 +63,13 @@ pytest -s
 
 ## 已實作的測試案例
 
-本框架包含以下 Aviationstack API 的測試案例：
+本框架包含以下針對 Aviationstack API 的測試案例：
 
-### Aviationstack API 測試 (`test_aviation.py`)
--   **`test_get_airports_returns_200`**：驗證獲取機場列表的請求。此測試會檢查 API 是否回傳 200 OK 狀態碼，並斷言回應中確實包含 100 個機場，且列表中的第一個機場名稱為 "Anaa"。
--   **`test_get_countries_returns_100_with_200_ok`**: 驗證獲取國家列表的請求。此測試會檢查 API 是否回傳 200 OK 狀態碼，並斷言回應中確實包含 100 個國家，且列表中的第一個國家名稱為 "Andorra"。
+| 測試檔案 | 測試案例 | 描述 |
+| :--- | :--- | :--- |
+| `test_aviation.py` | `test_get_airports_returns_200` | 驗證對 `/airports` 端點的請求。檢查 API 是否回傳 200 OK 狀態碼，並斷言回應中包含 100 個機場，且第一個機場為 "Anaa"。 |
+| `test_aviation.py` | `test_get_countries_returns_100_with_200_ok` | 驗證對 `/countries` 端點的請求。檢查 API 是否回傳 200 OK 狀態碼，並斷言回應中包含 100 個國家，且第一個國家為 "Andorra"。 |
+| `test_aviation.py` | `test_get_request_with_invalid_api_key` | 驗證當使用錯誤的 API 金鑰時，API 是否回傳 'invalid_access_key' 錯誤和 401 狀態碼。 |
 
 ---
 
-*註：此專案的程式碼與文件由 Google Gemini 輔助生成。*
